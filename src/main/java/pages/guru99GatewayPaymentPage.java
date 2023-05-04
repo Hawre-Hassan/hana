@@ -1,0 +1,53 @@
+package pages;
+
+import org.apache.log4j.Logger;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import utils.BrowserUtils;
+import utils.Driver;
+
+import static utils.BrowserUtils.selectFromDropDown;
+import static utils.BrowserUtils.staticWait;
+
+public class guru99GatewayPaymentPage extends BrowserUtils {
+    public guru99GatewayPaymentPage(){
+        PageFactory.initElements(Driver.getDriver(),this);}
+    private static final Logger logger=Logger.getLogger(guru99GatewayPaymentPage.class);
+    @FindBy(id = "card_nmuber")
+    private WebElement cardNumber;
+    @FindBy(id = "month")
+    private WebElement month;
+    @FindBy(id = "year")
+    private WebElement year;
+    @FindBy(id = "cvv_code")
+    private WebElement cvv_code;
+    @FindBy(xpath = "//input[@type='submit']")
+    private WebElement payButton;
+
+    public void setCardNumber(String cardnumber) {
+       staticWait(1);
+        cardNumber.sendKeys(cardnumber);
+    }
+
+    public void setMonth(String Month) {
+        staticWait(1);
+        selectFromDropDown(month,Month);
+        logger.info("successful entered");
+    }
+
+    public void setYear(String Year) {
+        staticWait(1);
+        selectFromDropDown(year,Year);
+    }
+
+    public void setCcv(String Cvv_code) {
+       staticWait(1);
+        cvv_code.sendKeys(Cvv_code);
+    }
+
+    public void setPayButton() {
+        staticWait(1);
+        payButton.click();
+    }
+}
